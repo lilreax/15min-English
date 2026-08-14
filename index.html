@@ -78,7 +78,11 @@
   .feedback{ font-size:13px; margin-top:8px; color:var(--ink-soft); min-height:18px; }
   .empty{text-align:center; padding:30px 10px; color:var(--ink-soft); font-size:13.5px;}
   .empty .big{ font-family:'Fraunces',serif; font-size:17px; color:var(--ink); margin-bottom:6px; }
-  .updated-note{font-size:11px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; text-align:center; margin:10px 0 -4px;}
+  .updated-note{font-size:11px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; text-align:center; margin:10px 0 10px;}
+  .goal-banner{background:var(--teal-soft); color:var(--teal); font-weight:600; font-size:13px; text-align:center; padding:9px 12px; border-radius:10px; margin-bottom:14px;}
+  .card.read{ opacity:.72; }
+  .btn-mark{width:100%; padding:11px; border:1px solid var(--line); border-radius:11px; background:var(--paper-dim); color:var(--ink); font-weight:600; font-size:13.5px; cursor:pointer; margin-top:14px;}
+  .btn-mark.done{ background:var(--teal); color:#fff; border-color:var(--teal); }
   ::-webkit-scrollbar{ width:0; }
   a{ color:inherit; }
 </style>
@@ -179,7 +183,8 @@ const GRAMMAR = [
 const todayKey = () => new Date().toISOString().slice(0,10);
 const weekIndex = () => { const d=new Date(); const onejan=new Date(d.getFullYear(),0,1); return Math.ceil((((d-onejan)/86400000)+onejan.getDay()+1)/7); };
 
-let state = { streak:0, lastCompleted:null, completedDates:[], progressToday:{article:false, grammar:false}, progressLastDate:null };
+const DAILY_ARTICLE_GOAL = 2;
+let state = { streak:0, lastCompleted:null, completedDates:[], progressToday:{article:false, grammar:false}, progressLastDate:null, readLog:{} };
 let newsData = null;
 const defCache = {};
 
@@ -282,18 +287,22 @@ function renderArticle(){
       </div>`;
     return;
   }
-  let html = `<div class="updated-note">Mis à jour le ${newsData.updated} · catégorie : ${newsData.category}</div>`;
+  const todayCount = countReadToday();
+  let html = `
+    <div class="updated-note">Mis à jour le ${newsData.updated} · catégorie : ${newsData.category} · ${newsData.articles.length} articles cette semaine</div>
+    <div class="goal-banner">${todayCount >= DAILY_ARTICLE_GOAL ? `Objectif du jour atteint ✓ (${todayCount}/${DAILY_ARTICLE_GOAL})` : `Lis ${DAILY_ARTICLE_GOAL - todayCount} article(s) de plus aujourd'hui (${todayCount}/${DAILY_ARTICLE_GOAL})`}</div>`;
   newsData.articles.forEach((a, i)=>{
+    const isRead = !!state.readLog[a.url];
     html += `
-      <div class="card" data-ai="${i}">
+      <div class="card ${isRead?'read':''}" data-ai="${i}" data-url="${encodeURIComponent(a.url)}">
         <span class="topic-tag">${a.source || 'News'} · ${a.readMinutes || 1} min</span>
         <h2 class="article-title">${wrapWords(a.title)}</h2>
         <div class="article-body">${wrapWords(a.description)}</div>
         <a class="source-link" href="${a.url}" target="_blank" rel="noopener">Lire l'article complet ↗</a>
         <div class="define-pop"></div>
+        <button class="btn-mark ${isRead?'done':''}" data-url="${encodeURIComponent(a.url)}">${isRead ? 'Lu ✓' : "Marquer comme lu"}</button>
       </div>`;
   });
-  html += `<button class="btn-primary ${state.progressToday.article?'done':''}" id="markArticleDone">${state.progressToday.article?'Articles marqués comme lus ✓':"J'ai lu mes articles du jour"}</button>`;
   panel.innerHTML = html;
 
   panel.querySelectorAll('.card').forEach(card=>{
@@ -302,11 +311,27 @@ function renderArticle(){
       w.addEventListener('click', ()=> defineWord(w.textContent, w, pop));
     });
   });
-  document.getElementById('markArticleDone').addEventListener('click', (e)=>{
-    markDone('article');
-    e.target.textContent = 'Articles marqués comme lus ✓';
-    e.target.classList.add('done');
+  panel.querySelectorAll('.btn-mark').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const url = decodeURIComponent(btn.dataset.url);
+      if(!state.readLog[url]){
+        state.readLog[url] = todayKey();
+        btn.textContent = 'Lu ✓';
+        btn.classList.add('done');
+        btn.closest('.card').classList.add('read');
+        saveState();
+        const count = countReadToday();
+        panel.querySelector('.goal-banner').textContent =
+          count >= DAILY_ARTICLE_GOAL ? `Objectif du jour atteint ✓ (${count}/${DAILY_ARTICLE_GOAL})` : `Lis ${DAILY_ARTICLE_GOAL - count} article(s) de plus aujourd'hui (${count}/${DAILY_ARTICLE_GOAL})`;
+        if(count >= DAILY_ARTICLE_GOAL) markDone('article');
+      }
+    });
   });
+}
+
+function countReadToday(){
+  const key = todayKey();
+  return Object.values(state.readLog || {}).filter(d => d === key).length;
 }
 
 /* ============ GRAMMAR PANEL ============ */
@@ -374,7 +399,7 @@ function renderProgress(){
   document.getElementById('panel-progress').innerHTML = html;
   document.getElementById('resetBtn').addEventListener('click', async ()=>{
     if(confirm('Tout remettre à zéro ?')){
-      state = { streak:0, lastCompleted:null, completedDates:[], progressToday:{article:false,grammar:false}, progressLastDate: todayKey() };
+      state = { streak:0, lastCompleted:null, completedDates:[], progressToday:{article:false,grammar:false}, progressLastDate: todayKey(), readLog:{} };
       await saveState();
       renderAll();
     }
