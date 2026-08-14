@@ -24,7 +24,7 @@ category = CATEGORIES[today.isocalendar()[1] % len(CATEGORIES)]
 params = {
     "language": "en",
     "category": category,
-    "pageSize": 10,
+    "pageSize": 15,
     "apiKey": API_KEY,
 }
 url = "https://newsapi.org/v2/top-headlines?" + urllib.parse.urlencode(params)
@@ -62,7 +62,7 @@ out = {
     "updated": today.isoformat(),
     "week": today.isocalendar()[1],
     "category": category,
-    "articles": articles[:8],
+    "articles": articles[:15],
 }
 
 os.makedirs("data", exist_ok=True)
