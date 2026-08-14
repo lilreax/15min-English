@@ -176,12 +176,164 @@ const GRAMMAR = [
       {before:"I was ", answer:"surprised", after:" by the results.", hint:"ce que je ressens"},
       {before:"This exercise is ", answer:"exhausting", after:".", hint:"produit la fatigue"},
       {before:"She felt ", answer:"confused", after:" after the lecture.", hint:"ce qu'elle ressent"}
+    ]},
+  { title:"Le discours indirect (reported speech)", sub:"Rapporter les paroles de quelqu'un — le fameux 'backshift' des temps.",
+    rule:"Quand on rapporte une parole, les temps reculent généralement d'un cran : present → past, present perfect → past perfect, will → would. 'I am tired' devient She said (that) she was tired.",
+    blanks:[
+      {before:"He said, 'I am busy.' → He said (that) he ", answer:"was", after:" busy.", hint:"present → past"},
+      {before:"She said, 'I will call you.' → She said she ", answer:"would", after:" call me.", hint:"will → would"},
+      {before:"They said, 'We have finished.' → They said they ", answer:"had finished", after:".", hint:"present perfect → past perfect"},
+      {before:"He said, 'I saw her yesterday.' → He said he ", answer:"had seen", after:" her the day before.", hint:"past → past perfect"}
+    ]},
+  { title:"La voix passive", sub:"Utile pour les résumés d'articles scientifiques et de presse.",
+    rule:"On forme le passif avec <code>be + participe passé</code>. Le sujet de la phrase active devient l'agent introduit par 'by' (ou disparaît si peu important). 'They built the bridge' → The bridge was built (by them).",
+    blanks:[
+      {before:"The results ", answer:"were published", after:" last week.", hint:"be + participe passé, passé"},
+      {before:"English ", answer:"is spoken", after:" all over the world.", hint:"présent passif"},
+      {before:"The report ", answer:"is being written", after:" right now.", hint:"présent progressif passif"},
+      {before:"The bridge ", answer:"was built", after:" in 1990.", hint:"passé simple passif"}
+    ]},
+  { title:"MUST / HAVE TO / SHOULD", sub:"Nuancer obligation forte, obligation externe et conseil.",
+    rule:"<code>Must</code> exprime une obligation qui vient de la personne qui parle (I must study tonight). <code>Have to</code> exprime une obligation imposée de l'extérieur (I have to wear a uniform at work). <code>Should</code> exprime un simple conseil (You should sleep more).",
+    blanks:[
+      {before:"Students ", answer:"have to", after:" wear a badge on campus (school rule).", hint:"obligation externe"},
+      {before:"You really ", answer:"should", after:" revise before the exam (conseil).", hint:"conseil"},
+      {before:"I ", answer:"must", after:" finish this today, I promised myself (obligation personnelle).", hint:"obligation interne"},
+      {before:"She ", answer:"has to", after:" show her ID at the border.", hint:"obligation externe (règle)"}
+    ]},
+  { title:"Comparatifs et superlatifs", sub:"Adjectifs courts vs longs — la règle qui change tout.",
+    rule:"Adjectifs courts (1 syllabe, parfois 2): -er / the -est (bigger, the biggest). Adjectifs longs (2+ syllabes): more / the most (more interesting, the most interesting). Attention aux irréguliers: good→better→the best, bad→worse→the worst.",
+    blanks:[
+      {before:"This exercise is ", answer:"more difficult", after:" than the last one.", hint:"adjectif long"},
+      {before:"He is ", answer:"the best", after:" student in the class.", hint:"irrégulier: good"},
+      {before:"Today is ", answer:"colder", after:" than yesterday.", hint:"adjectif court"},
+      {before:"That was ", answer:"the worst", after:" film I've ever seen.", hint:"irrégulier: bad"}
+    ]},
+  { title:"Pronoms relatifs : WHO / WHICH / THAT / WHOSE", sub:"Relier deux idées sans répéter le nom.",
+    rule:"<code>Who</code> pour une personne, <code>which</code> pour une chose, <code>that</code> pour les deux (informel), <code>whose</code> pour la possession. Ex: The scientist who discovered it... / The book which I read... / The student whose essay won...",
+    blanks:[
+      {before:"The engineer ", answer:"who", after:" designed the bridge won an award.", hint:"personne"},
+      {before:"This is the article ", answer:"which", after:" I mentioned earlier.", hint:"chose"},
+      {before:"That's the student ", answer:"whose", after:" project was selected.", hint:"possession"},
+      {before:"The man ", answer:"who", after:" called you is my professor.", hint:"personne"}
+    ]},
+  { title:"Question tags", sub:"Ces petites questions ajoutées en fin de phrase (n'est-ce pas ?).",
+    rule:"Le tag reprend l'auxiliaire de la phrase, à la forme opposée. Affirmatif → tag négatif, négatif → tag affirmatif. 'You are tired, aren't you?' / 'She doesn't like it, does she?'",
+    blanks:[
+      {before:"You like coffee, ", answer:"don't you", after:"?", hint:"affirmatif → tag négatif"},
+      {before:"She isn't coming, ", answer:"is she", after:"?", hint:"négatif → tag affirmatif"},
+      {before:"They have finished, ", answer:"haven't they", after:"?", hint:"affirmatif → tag négatif"},
+      {before:"He can swim, ", answer:"can't he", after:"?", hint:"affirmatif → tag négatif"}
+    ]},
+  { title:"USED TO / WOULD pour les habitudes passées", sub:"Parler d'un passé révolu.",
+    rule:"<code>Used to</code> décrit un état ou une habitude passée qui n'existe plus (I used to live in Lyon). <code>Would</code> ne fonctionne que pour des actions répétées, jamais pour un état (When I was young, I would visit my grandmother every summer — mais pas 'I would live in Lyon').",
+    blanks:[
+      {before:"I ", answer:"used to", after:" be afraid of the dark when I was a child.", hint:"état passé"},
+      {before:"Every Sunday, we ", answer:"would", after:" go to the market together.", hint:"action répétée"},
+      {before:"She ", answer:"used to", after:" have long hair.", hint:"état passé"},
+      {before:"He ", answer:"would", after:" always arrive early for class.", hint:"action répétée"}
+    ]},
+  { title:"Articles : A / AN / THE / rien", sub:"Le piège numéro un pour les francophones.",
+    rule:"<code>A/an</code> pour une chose non précise mentionnée pour la première fois. <code>The</code> quand on parle d'une chose précise déjà connue. Pas d'article pour les généralités au pluriel ou indénombrables (Cats are independent, not 'The cats').",
+    blanks:[
+      {before:"I saw ", answer:"a", after:" dog in the street.", hint:"première mention, non précis"},
+      {before:"", answer:"The", after:" dog I saw yesterday followed me home.", hint:"précis, déjà connu"},
+      {before:"Can you close ", answer:"the", after:" door, please?", hint:"précis, connu des deux interlocuteurs"},
+      {before:"She is ", answer:"an", after:" engineer.", hint:"voyelle → an"}
+    ]},
+  { title:"MUCH / MANY / FEW / LITTLE", sub:"Dénombrable vs indénombrable.",
+    rule:"<code>Many</code> et <code>few</code> pour le dénombrable (many students, few chairs). <code>Much</code> et <code>little</code> pour l'indénombrable (much time, little money). <code>A lot of</code> marche pour les deux.",
+    blanks:[
+      {before:"There isn't ", answer:"much", after:" time left.", hint:"indénombrable"},
+      {before:"How ", answer:"many", after:" students are in your class?", hint:"dénombrable"},
+      {before:"We have ", answer:"little", after:" information about this.", hint:"indénombrable, peu"},
+      {before:"", answer:"Few", after:" people know the full story.", hint:"dénombrable, peu"}
+    ]},
+  { title:"SO vs SUCH", sub:"Intensifier un adjectif ou un nom.",
+    rule:"<code>So</code> + adjectif seul (so difficult). <code>Such</code> + (a/an) + adjectif + nom (such a difficult exam, such interesting articles).",
+    blanks:[
+      {before:"The exam was ", answer:"so", after:" difficult.", hint:"so + adjectif seul"},
+      {before:"It was ", answer:"such", after:" a difficult exam.", hint:"such + a + adj + nom"},
+      {before:"They are ", answer:"such", after:" interesting articles.", hint:"such + adj + nom pluriel"},
+      {before:"She was ", answer:"so", after:" tired after the trip.", hint:"so + adjectif seul"}
+    ]},
+  { title:"WISH / IF ONLY — exprimer un regret", sub:"Regretter le présent ou le passé.",
+    rule:"Regret présent: <code>wish + past simple</code> (I wish I had more time). Regret passé: <code>wish + past perfect</code> (I wish I had studied harder).",
+    blanks:[
+      {before:"I wish I ", answer:"had", after:" more free time.", hint:"regret présent → past simple"},
+      {before:"She wishes she ", answer:"had studied", after:" harder for the exam.", hint:"regret passé → past perfect"},
+      {before:"If only I ", answer:"knew", after:" the answer.", hint:"regret présent → past simple"},
+      {before:"He wishes he ", answer:"hadn't said", after:" that.", hint:"regret passé → past perfect négatif"}
+    ]},
+  { title:"La forme causative : HAVE/GET something done", sub:"Faire faire quelque chose par quelqu'un d'autre.",
+    rule:"<code>Have/get + objet + participe passé</code> signifie qu'on fait faire l'action par quelqu'un d'autre. 'I cut my hair' (moi-même) vs 'I had my hair cut' (par un coiffeur).",
+    blanks:[
+      {before:"She ", answer:"had her car repaired", after:" last week.", hint:"faire faire par un mécanicien"},
+      {before:"We're going to ", answer:"get the house painted", after:" this summer.", hint:"faire faire par un peintre"},
+      {before:"He ", answer:"had his photo taken", after:" for his ID card.", hint:"faire faire par un photographe"},
+      {before:"I need to ", answer:"get my computer fixed", after:".", hint:"faire faire par un technicien"}
+    ]},
+  { title:"L'inversion après les adverbes négatifs", sub:"Un tour stylistique qui revient dans les textes soutenus.",
+    rule:"Quand une phrase commence par un adverbe négatif (never, rarely, hardly, no sooner), le sujet et l'auxiliaire s'inversent, comme dans une question. 'I have never seen this' → Never have I seen this.",
+    blanks:[
+      {before:"", answer:"Never have I", after:" seen such a beautiful sunset.", hint:"never + inversion"},
+      {before:"", answer:"Rarely does she", after:" arrive late.", hint:"rarely + inversion (do/does)"},
+      {before:"", answer:"Hardly had he", after:" finished when the phone rang.", hint:"hardly + inversion (had)"},
+      {before:"", answer:"No sooner had they", after:" left than it started raining.", hint:"no sooner + inversion"}
+    ]},
+  { title:"Modaux de déduction : MUST / MIGHT / CAN'T + have + participe passé", sub:"Faire une supposition sur le passé.",
+    rule:"<code>Must have + participe passé</code> = quasi-certitude positive (He must have forgotten). <code>Might/could have</code> = possibilité (She might have missed the bus). <code>Can't have</code> = quasi-certitude négative (They can't have arrived already).",
+    blanks:[
+      {before:"He's not answering — he ", answer:"must have", after:" left already.", hint:"quasi-certitude"},
+      {before:"She ", answer:"might have", after:" forgotten about the meeting.", hint:"possibilité"},
+      {before:"They ", answer:"can't have", after:" finished so quickly, it's too soon.", hint:"quasi-certitude négative"},
+      {before:"I ", answer:"could have", after:" made a mistake in the calculation.", hint:"possibilité"}
+    ]},
+  { title:"Les faux amis les plus fréquents", sub:"Ces mots qui ressemblent au français mais ne veulent pas dire la même chose.",
+    rule:"<code>Actually</code> = en fait (pas 'actuellement' = currently). <code>Eventually</code> = finalement (pas 'éventuellement' = possibly). <code>Library</code> = bibliothèque (pas 'librairie' = bookshop). <code>Sensible</code> = raisonnable (pas 'sensible' = sensitive).",
+    blanks:[
+      {before:"", answer:"Actually", after:", I don't agree with you (en fait).", hint:"en fait, pas 'actuellement'"},
+      {before:"After many delays, the project was ", answer:"eventually", after:" completed (finalement).", hint:"finalement, pas 'éventuellement'"},
+      {before:"I borrowed this book from the ", answer:"library", after:" (bibliothèque).", hint:"bibliothèque, pas 'librairie'"},
+      {before:"It's a ", answer:"sensible", after:" decision given the circumstances (raisonnable).", hint:"raisonnable, pas 'sensible'"}
+    ]},
+  { title:"FOR vs SINCE avec le present perfect", sub:"Exprimer une durée depuis un point de départ.",
+    rule:"<code>For</code> + une durée (for three years, for a week). <code>Since</code> + un point précis dans le temps (since 2020, since Monday, since I arrived).",
+    blanks:[
+      {before:"I have lived here ", answer:"for", after:" five years.", hint:"durée"},
+      {before:"She has worked there ", answer:"since", after:" 2019.", hint:"point de départ précis"},
+      {before:"We haven't spoken ", answer:"since", after:" last Monday.", hint:"point de départ précis"},
+      {before:"They have been waiting ", answer:"for", after:" two hours.", hint:"durée"}
+    ]},
+  { title:"LIKE vs AS — comparer ou définir un rôle", sub:"Un piège classique de traduction du français 'comme'.",
+    rule:"<code>Like</code> = 'semblable à', pour une comparaison (He swims like a fish). <code>As</code> = 'en tant que', pour définir un rôle réel ou une fonction (He works as a teacher).",
+    blanks:[
+      {before:"She works ", answer:"as", after:" a translator.", hint:"rôle réel"},
+      {before:"He sings ", answer:"like", after:" a professional.", hint:"comparaison"},
+      {before:"", answer:"As", after:" a student, I get a discount.", hint:"rôle/statut réel"},
+      {before:"This tastes ", answer:"like", after:" chicken.", hint:"comparaison"}
+    ]},
+  { title:"Les verbes de perception + base verbale ou -ING", sub:"See/hear/watch + action complète ou en cours.",
+    rule:"<code>Verbe de perception + base verbale</code> (sans to) décrit une action vue/entendue du début à la fin (I saw him leave). <code>Verbe de perception + -ing</code> décrit une action surprise en cours, incomplète (I saw him leaving as I arrived).",
+    blanks:[
+      {before:"I heard her ", answer:"sing", after:" the whole song.", hint:"action complète, base verbale"},
+      {before:"I saw him ", answer:"crossing", after:" the street when I looked out the window.", hint:"action surprise en cours"},
+      {before:"We watched the plane ", answer:"take off", after:".", hint:"action complète"},
+      {before:"She heard someone ", answer:"knocking", after:" at the door.", hint:"action en cours"}
+    ]},
+  { title:"DESPITE / ALTHOUGH — exprimer l'opposition", sub:"Deux façons de dire 'bien que', avec une grammaire différente.",
+    rule:"<code>Although/though</code> + proposition complète (sujet + verbe): Although it was raining, we went out. <code>Despite/in spite of</code> + nom ou -ing (jamais une proposition): Despite the rain, we went out. / Despite raining, ...",
+    blanks:[
+      {before:"", answer:"Although", after:" it was raining, we went for a walk.", hint:"+ proposition complète"},
+      {before:"", answer:"Despite", after:" the rain, we went for a walk.", hint:"+ nom, pas de sujet/verbe"},
+      {before:"He passed the exam ", answer:"despite", after:" not studying much.", hint:"+ -ing"},
+      {before:"", answer:"Although", after:" she was tired, she kept working.", hint:"+ proposition complète"}
     ]}
 ];
 
 /* ============ STATE ============ */
 const todayKey = () => new Date().toISOString().slice(0,10);
-const weekIndex = () => { const d=new Date(); const onejan=new Date(d.getFullYear(),0,1); return Math.ceil((((d-onejan)/86400000)+onejan.getDay()+1)/7); };
+const dayIndex = () => Math.floor(Date.now()/86400000);
 
 const DAILY_ARTICLE_GOAL = 2;
 let state = { streak:0, lastCompleted:null, completedDates:[], progressToday:{article:false, grammar:false}, progressLastDate:null, readLog:{} };
@@ -336,7 +488,7 @@ function countReadToday(){
 
 /* ============ GRAMMAR PANEL ============ */
 function renderGrammar(){
-  const l = GRAMMAR[weekIndex() % GRAMMAR.length];
+  const l = GRAMMAR[dayIndex() % GRAMMAR.length];
   let html = `
     <div class="card">
       <h2 class="lesson-title">${l.title}</h2>
