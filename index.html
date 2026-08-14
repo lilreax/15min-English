@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>15 min d'anglais</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#182338">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#182338; --ink-soft:#3c4a63; --paper:#faf7f0; --paper-dim:#f0ebdf;
+    --card:#ffffff; --gold:#d9a441; --gold-deep:#b8822a; --teal:#3f7268;
+    --teal-soft:#e4efec; --line:#e2dcca; --danger:#b0503f; --radius:16px;
+    --shadow: 0 1px 2px rgba(24,35,56,.06), 0 8px 24px -12px rgba(24,35,56,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; min-height:100vh;}
+  #app{max-width:460px; margin:0 auto; min-height:100vh; display:flex; flex-direction:column;
+    background: radial-gradient(circle at 100% 0%, rgba(217,164,65,.10), transparent 45%), var(--paper); position:relative;}
+  header{padding:22px 20px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px;}
+  .brand{display:flex; flex-direction:column; line-height:1.05;}
+  .brand .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; margin-bottom:4px;}
+  .brand h1{font-family:'Fraunces',serif; font-size:22px; font-weight:700; margin:0; letter-spacing:-.01em;}
+  .streak{display:flex; align-items:center; gap:6px; background:var(--card); border:1px solid var(--line); border-radius:999px; padding:6px 12px 6px 10px; box-shadow:var(--shadow); font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--ink); white-space:nowrap;}
+  .session-card{margin:4px 20px 18px; background:var(--ink); border-radius:20px; padding:20px; display:flex; align-items:center; gap:16px; color:var(--paper); box-shadow:var(--shadow); position:relative; overflow:hidden;}
+  .session-card::after{content:""; position:absolute; right:-40px; top:-40px; width:140px; height:140px; background:radial-gradient(circle, rgba(217,164,65,.35), transparent 70%);}
+  .ring-wrap{position:relative; width:64px; height:64px; flex:0 0 auto;}
+  .ring-wrap svg{ transform:rotate(-90deg); }
+  .ring-bg{ stroke:rgba(250,247,240,.18); fill:none; stroke-width:6; }
+  .ring-fg{ stroke:var(--gold); fill:none; stroke-width:6; stroke-linecap:round; transition:stroke-dashoffset .4s ease; }
+  .ring-label{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600;}
+  .session-text .label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; opacity:.65; margin-bottom:3px;}
+  .session-text .value{font-family:'Fraunces',serif; font-size:19px; font-weight:600;}
+  .tabs{display:flex; gap:6px; padding:0 20px; margin-bottom:14px;}
+  .tab{flex:1; text-align:center; padding:10px 4px; border-radius:12px; font-size:12.5px; font-weight:600; color:var(--ink-soft); background:var(--paper-dim); border:1px solid transparent; cursor:pointer; transition:all .15s ease; user-select:none;}
+  .tab.active{background:var(--ink); color:var(--paper);}
+  .tab .dot{display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--teal); margin-left:5px; vertical-align:middle;}
+  .tab.active .dot{ background:var(--gold); }
+  main{flex:1; padding:0 20px 28px;}
+  .panel{ display:none; animation:fade .25s ease; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px 18px 20px; margin-bottom:14px;}
+  .topic-tag{display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--teal); background:var(--teal-soft); padding:4px 10px; border-radius:999px; font-weight:600; margin-bottom:10px;}
+  .article-title{font-family:'Fraunces',serif; font-size:20px; font-weight:700; line-height:1.28; margin:0 0 8px;}
+  .article-meta{font-size:11.5px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; margin-bottom:14px;}
+  .article-body{font-size:15.5px; line-height:1.7;}
+  .word{cursor:pointer; border-radius:3px; padding:0 1px;}
+  .word:hover{background:rgba(217,164,65,.25);}
+  .word.looked{background:rgba(63,114,104,.15); font-weight:600;}
+  .source-link{display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-size:13px; font-weight:600; color:var(--teal); text-decoration:none;}
+  .define-pop{display:none; margin-top:12px; background:var(--teal-soft); border-left:3px solid var(--teal); border-radius:0 10px 10px 0; padding:10px 12px; font-size:13.5px; line-height:1.5;}
+  .define-pop.show{ display:block; animation:fade .2s ease; }
+  .define-pop b{ font-family:'IBM Plex Mono',monospace; color:var(--teal); }
+  .define-pop .pos{ font-style:italic; opacity:.7; font-size:12px; }
+  .section-label{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin:20px 0 10px; display:flex; align-items:center; gap:8px;}
+  .section-label::after{content:""; flex:1; height:1px; background:var(--line);}
+  .lesson-title{font-family:'Fraunces',serif; font-size:19px; font-weight:700; margin:0 0 6px;}
+  .lesson-sub{ font-size:13.5px; color:var(--ink-soft); margin-bottom:14px; line-height:1.5; }
+  .rule-box{background:var(--paper-dim); border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.6; margin-bottom:16px;}
+  .rule-box code{font-family:'IBM Plex Mono',monospace; background:var(--card); padding:1px 6px; border-radius:5px; font-size:12.5px; color:var(--gold-deep); border:1px solid var(--line);}
+  .fill-blank input{font-family:'IBM Plex Mono',monospace; font-size:14px; border:1px solid var(--line); border-radius:8px; padding:6px 8px; width:110px; background:var(--card);}
+  .fill-blank input:focus{ outline:2px solid var(--gold); border-color:var(--gold); }
+  .stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px;}
+  .stat{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:var(--shadow);}
+  .stat .num{font-family:'Fraunces',serif; font-size:26px; font-weight:700;}
+  .stat .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); margin-top:2px;}
+  .week-row{ display:flex; gap:6px; margin-top:6px; }
+  .week-day{flex:1; aspect-ratio:1; border-radius:8px; background:var(--paper-dim); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; color:var(--ink-soft);}
+  .week-day.done{ background:var(--gold); color:#3a2a0a; }
+  .btn-primary{width:100%; padding:14px; border:none; border-radius:12px; background:var(--ink); color:var(--paper); font-weight:600; font-size:14.5px; cursor:pointer; margin-top:6px;}
+  .btn-primary:active{ transform:scale(.98); }
+  .btn-primary.done{ background:var(--teal); }
+  .btn-ghost{width:100%; padding:12px; border-radius:12px; border:1px solid var(--line); background:transparent; color:var(--ink-soft); font-size:13px; cursor:pointer; margin-top:8px;}
+  .feedback{ font-size:13px; margin-top:8px; color:var(--ink-soft); min-height:18px; }
+  .empty{text-align:center; padding:30px 10px; color:var(--ink-soft); font-size:13.5px;}
+  .empty .big{ font-family:'Fraunces',serif; font-size:17px; color:var(--ink); margin-bottom:6px; }
+  .updated-note{font-size:11px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; text-align:center; margin:10px 0 -4px;}
+  ::-webkit-scrollbar{ width:0; }
+  a{ color:inherit; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header>
+    <div class="brand">
+      <span class="eyebrow">Rituel du jour</span>
+      <h1>15 min d'anglais</h1>
+    </div>
+    <div class="streak">🔥 <span id="streakNum">0</span></div>
+  </header>
+
+  <div class="session-card">
+    <div class="ring-wrap">
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <circle class="ring-bg" cx="32" cy="32" r="27"></circle>
+        <circle class="ring-fg" id="ringFg" cx="32" cy="32" r="27" stroke-dasharray="169.6" stroke-dashoffset="169.6"></circle>
+      </svg>
+      <div class="ring-label" id="ringLabel">0%</div>
+    </div>
+    <div class="session-text">
+      <div class="label">Session du jour</div>
+      <div class="value" id="sessionValue">Pas encore commencée</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="article">Articles<span class="dot" id="dotArticle"></span></div>
+    <div class="tab" data-tab="grammar">Grammaire<span class="dot" id="dotGrammar"></span></div>
+    <div class="tab" data-tab="progress">Progrès</div>
+  </div>
+
+  <main>
+    <section class="panel active" id="panel-article"></section>
+    <section class="panel" id="panel-grammar"></section>
+    <section class="panel" id="panel-progress"></section>
+  </main>
+
+</div>
+
+<script>
+/* ============ GRAMMAR CONTENT (curated, rotates weekly) ============ */
+const GRAMMAR = [
+  { title:"AT / IN / ON — les prépositions de temps", sub:"La règle que tu confonds le plus souvent en DS.",
+    rule:"On utilise <code>AT</code> pour une heure précise (at 6pm), <code>IN</code> pour un mois, une année ou une saison (in July, in 2024, in summer), et <code>ON</code> pour un jour ou une date précise (on Monday, on July 4th).",
+    blanks:[
+      {before:"I usually wake up ", answer:"at", after:" 7am.", hint:"heure précise"},
+      {before:"Her exam is ", answer:"on", after:" Friday.", hint:"jour précis"},
+      {before:"We moved to Paris ", answer:"in", after:" 2021.", hint:"année"},
+      {before:"The shop closes ", answer:"at", after:" midnight.", hint:"heure précise"}
+    ]},
+  { title:"Present Perfect vs Simple Past", sub:"Le piège classique pour les francophones.",
+    rule:"Le <code>Simple Past</code> décrit une action terminée à un moment précis du passé (I visited London last year). Le <code>Present Perfect</code> décrit une action passée dont le résultat compte encore maintenant, souvent sans date précise (I have visited London).",
+    blanks:[
+      {before:"I ", answer:"have already read", after:" this book.", hint:"present perfect: already"},
+      {before:"She ", answer:"visited", after:" Rome in 2019.", hint:"date précise → simple past"},
+      {before:"They ", answer:"have never eaten", after:" sushi before.", hint:"expérience, pas de date"},
+      {before:"We ", answer:"finished", after:" the project last Monday.", hint:"date précise → simple past"}
+    ]},
+  { title:"Les verbes suivis de -ING vs TO + infinitif", sub:"Utile pour les sujets d'expression écrite type DS.",
+    rule:"Certains verbes sont toujours suivis d'un <code>gerund</code> (-ing) : enjoy, avoid, finish, suggest, imagine. D'autres sont suivis de <code>to + infinitif</code> : want, decide, hope, plan, refuse.",
+    blanks:[
+      {before:"I enjoy ", answer:"reading", after:" science articles.", hint:"enjoy + gerund"},
+      {before:"She decided ", answer:"to apply", after:" for the exchange program.", hint:"decide + to"},
+      {before:"He avoids ", answer:"talking", after:" about politics at dinner.", hint:"avoid + gerund"},
+      {before:"They plan ", answer:"to travel", after:" around Ireland this summer.", hint:"plan + to"}
+    ]},
+  { title:"Phrasal verbs indispensables", sub:"Ceux qui reviennent le plus dans les articles de presse.",
+    rule:"<code>bring up</code> = mentionner · <code>figure out</code> = comprendre · <code>look into</code> = enquêter sur · <code>come up with</code> = trouver (une idée) · <code>set up</code> = mettre en place.",
+    blanks:[
+      {before:"The committee will ", answer:"look into", after:" the allegations.", hint:"enquêter sur"},
+      {before:"Engineers finally ", answer:"figured out", after:" why the system crashed.", hint:"ont compris"},
+      {before:"She didn't want to ", answer:"bring up", after:" the topic.", hint:"mentionner"},
+      {before:"The team had to ", answer:"come up with", after:" a new plan.", hint:"trouver une idée"}
+    ]},
+  { title:"Le conditionnel : zero / first / second", sub:"Distinguer une règle générale, un futur probable et une hypothèse irréelle.",
+    rule:"<code>Zero</code> (vérité générale): If you heat ice, it melts. <code>First</code> (futur probable): If it rains, we will stay home. <code>Second</code> (hypothèse irréelle): If I had more time, I would learn Japanese.",
+    blanks:[
+      {before:"If she ", answer:"studies", after:" hard, she will pass.", hint:"first conditional"},
+      {before:"If I ", answer:"were", after:" you, I would apply now.", hint:"second conditional (be)"},
+      {before:"Water ", answer:"boils", after:" if you heat it to 100°C.", hint:"zero conditional"},
+      {before:"If they ", answer:"had", after:" more funding, they would hire more staff.", hint:"second conditional"}
+    ]},
+  { title:"Adjectifs en -ED vs -ING", sub:"Piège fréquent : bored vs boring.",
+    rule:"Les adjectifs en <code>-ED</code> décrivent ce que ressent une personne (I am bored). Les adjectifs en <code>-ING</code> décrivent ce qui produit ce sentiment (This lecture is boring).",
+    blanks:[
+      {before:"The documentary was really ", answer:"interesting", after:".", hint:"produit l'intérêt"},
+      {before:"I was ", answer:"surprised", after:" by the results.", hint:"ce que je ressens"},
+      {before:"This exercise is ", answer:"exhausting", after:".", hint:"produit la fatigue"},
+      {before:"She felt ", answer:"confused", after:" after the lecture.", hint:"ce qu'elle ressent"}
+    ]}
+];
+
+/* ============ STATE ============ */
+const todayKey = () => new Date().toISOString().slice(0,10);
+const weekIndex = () => { const d=new Date(); const onejan=new Date(d.getFullYear(),0,1); return Math.ceil((((d-onejan)/86400000)+onejan.getDay()+1)/7); };
+
+let state = { streak:0, lastCompleted:null, completedDates:[], progressToday:{article:false, grammar:false}, progressLastDate:null };
+let newsData = null;
+const defCache = {};
+
+async function loadState(){
+  try{
+    const raw = localStorage.getItem('daily-english-state');
+    if(raw) state = Object.assign(state, JSON.parse(raw));
+  }catch(e){}
+  const key = todayKey();
+  if(state.progressLastDate !== key){
+    state.progressToday = { article:false, grammar:false };
+    state.progressLastDate = key;
+  }
+}
+async function saveState(){
+  try{ localStorage.setItem('daily-english-state', JSON.stringify(state)); }catch(e){}
+}
+
+async function loadNews(){
+  try{
+    const res = await fetch('data/articles.json', {cache:'no-store'});
+    if(res.ok) newsData = await res.json();
+  }catch(e){ newsData = null; }
+}
+
+/* ============ HEADER / RING ============ */
+function updateHeader(){
+  document.getElementById('streakNum').textContent = state.streak;
+  const done = (state.progressToday.article?1:0) + (state.progressToday.grammar?1:0);
+  const pct = Math.round((done/2)*100);
+  const circumference = 169.6;
+  document.getElementById('ringFg').style.strokeDashoffset = circumference - (circumference*pct/100);
+  document.getElementById('ringLabel').textContent = pct + '%';
+  document.getElementById('sessionValue').textContent =
+    pct === 0 ? "Pas encore commencée" : pct === 100 ? "Session terminée ✓" : "En cours — encore un peu";
+  document.getElementById('dotArticle').style.background = state.progressToday.article ? 'var(--gold)' : 'var(--teal)';
+  document.getElementById('dotGrammar').style.background = state.progressToday.grammar ? 'var(--gold)' : 'var(--teal)';
+}
+
+function markDone(part){
+  if(!state.progressToday[part]){
+    state.progressToday[part] = true;
+    updateHeader();
+    maybeCompleteDay();
+    saveState();
+  }
+}
+
+function maybeCompleteDay(){
+  if(state.progressToday.article && state.progressToday.grammar){
+    const key = todayKey();
+    if(state.lastCompleted !== key){
+      state.lastCompleted = key;
+      if(!state.completedDates.includes(key)) state.completedDates.push(key);
+      const yest = new Date(Date.now()-86400000).toISOString().slice(0,10);
+      state.streak = state.completedDates.includes(yest) ? state.streak+1 : (state.streak===0?1:state.streak+1);
+      saveState();
+    }
+  }
+}
+
+/* ============ DICTIONARY LOOKUP ============ */
+async function defineWord(raw, el, popEl){
+  const word = raw.toLowerCase().replace(/[^a-z'-]/g,'');
+  if(!word) return;
+  popEl.classList.add('show');
+  if(defCache[word]){ popEl.innerHTML = defCache[word]; el.classList.add('looked'); return; }
+  popEl.innerHTML = '<i>Recherche…</i>';
+  try{
+    const res = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(word));
+    if(!res.ok) throw new Error('not found');
+    const data = await res.json();
+    const meaning = data[0]?.meanings?.[0];
+    const def = meaning?.definitions?.[0]?.definition || 'Définition introuvable.';
+    const pos = meaning?.partOfSpeech || '';
+    const html = `<b>${word}</b> <span class="pos">${pos}</span><br>${def}`;
+    defCache[word] = html;
+    popEl.innerHTML = html;
+    el.classList.add('looked');
+  }catch(e){
+    popEl.innerHTML = `<b>${word}</b> — pas de définition trouvée (mot rare ou forme conjuguée). Essaie sa forme de base.`;
+  }
+}
+
+function wrapWords(text){
+  return text.split(/(\s+)/).map(tok=>{
+    if(/^\s+$/.test(tok) || tok.length===0) return tok;
+    return `<span class="word">${tok}</span>`;
+  }).join('');
+}
+
+/* ============ ARTICLE PANEL (real news) ============ */
+function renderArticle(){
+  const panel = document.getElementById('panel-article');
+  if(!newsData || !newsData.articles || newsData.articles.length===0){
+    panel.innerHTML = `
+      <div class="empty">
+        <div class="big">Pas encore d'articles</div>
+        Le fichier data/articles.json n'a pas encore été généré. Lance le workflow GitHub Actions une première fois (onglet Actions → Update weekly news → Run workflow), puis recharge cette page.
+      </div>`;
+    return;
+  }
+  let html = `<div class="updated-note">Mis à jour le ${newsData.updated} · catégorie : ${newsData.category}</div>`;
+  newsData.articles.forEach((a, i)=>{
+    html += `
+      <div class="card" data-ai="${i}">
+        <span class="topic-tag">${a.source || 'News'} · ${a.readMinutes || 1} min</span>
+        <h2 class="article-title">${wrapWords(a.title)}</h2>
+        <div class="article-body">${wrapWords(a.description)}</div>
+        <a class="source-link" href="${a.url}" target="_blank" rel="noopener">Lire l'article complet ↗</a>
+        <div class="define-pop"></div>
+      </div>`;
+  });
+  html += `<button class="btn-primary ${state.progressToday.article?'done':''}" id="markArticleDone">${state.progressToday.article?'Articles marqués comme lus ✓':"J'ai lu mes articles du jour"}</button>`;
+  panel.innerHTML = html;
+
+  panel.querySelectorAll('.card').forEach(card=>{
+    const pop = card.querySelector('.define-pop');
+    card.querySelectorAll('.word').forEach(w=>{
+      w.addEventListener('click', ()=> defineWord(w.textContent, w, pop));
+    });
+  });
+  document.getElementById('markArticleDone').addEventListener('click', (e)=>{
+    markDone('article');
+    e.target.textContent = 'Articles marqués comme lus ✓';
+    e.target.classList.add('done');
+  });
+}
+
+/* ============ GRAMMAR PANEL ============ */
+function renderGrammar(){
+  const l = GRAMMAR[weekIndex() % GRAMMAR.length];
+  let html = `
+    <div class="card">
+      <h2 class="lesson-title">${l.title}</h2>
+      <div class="lesson-sub">${l.sub}</div>
+      <div class="rule-box">${l.rule}</div>
+    </div>
+    <div class="section-label">À toi de jouer</div>
+    <div class="card">
+      <div id="blanksWrap"></div>
+      <button class="btn-primary" id="checkBlanks">Vérifier mes réponses</button>
+      <div class="feedback" id="blanksFeedback"></div>
+    </div>`;
+  document.getElementById('panel-grammar').innerHTML = html;
+  const wrap = document.getElementById('blanksWrap');
+  l.blanks.forEach((b,i)=>{
+    const row = document.createElement('div');
+    row.className = 'fill-blank';
+    row.style.marginBottom = '14px';
+    row.style.fontSize = '14.5px';
+    row.style.lineHeight = '1.6';
+    row.innerHTML = `${i+1}. ${b.before}<input type="text" data-i="${i}" placeholder="${b.hint}" autocomplete="off">${b.after}`;
+    wrap.appendChild(row);
+  });
+  document.getElementById('checkBlanks').addEventListener('click', ()=>{
+    let correctCount = 0;
+    l.blanks.forEach((b,i)=>{
+      const input = wrap.querySelector(`input[data-i="${i}"]`);
+      const ok = input.value.trim().toLowerCase() === b.answer.toLowerCase();
+      input.style.borderColor = ok ? 'var(--teal)' : 'var(--danger)';
+      input.style.background = ok ? 'var(--teal-soft)' : '#f6e6e2';
+      if(ok) correctCount++;
+    });
+    document.getElementById('blanksFeedback').textContent =
+      `${correctCount}/${l.blanks.length} bonnes réponses — réponses attendues : ${l.blanks.map(b=>b.answer).join(', ')}`;
+    markDone('grammar');
+  });
+}
+
+/* ============ PROGRESS PANEL ============ */
+function renderProgress(){
+  const days = ['L','M','M','J','V','S','D'];
+  const now = new Date();
+  const weekCells = [];
+  for(let i=6;i>=0;i--){
+    const d = new Date(now.getTime() - i*86400000);
+    const key = d.toISOString().slice(0,10);
+    weekCells.push({label:days[(d.getDay()+6)%7], done: state.completedDates.includes(key)});
+  }
+  const html = `
+    <div class="stat-grid">
+      <div class="stat"><div class="num">${state.streak}</div><div class="lbl">Jours de suite</div></div>
+      <div class="stat"><div class="num">${state.completedDates.length}</div><div class="lbl">Sessions total</div></div>
+    </div>
+    <div class="card">
+      <div class="section-label" style="margin-top:0">Cette semaine</div>
+      <div class="week-row">${weekCells.map(c=>`<div class="week-day ${c.done?'done':''}">${c.label}</div>`).join('')}</div>
+    </div>
+    ${state.completedDates.length===0 ? `<div class="empty"><div class="big">Rien pour l'instant</div>Termine les articles et la leçon du jour pour démarrer ta série.</div>` : ''}
+    <button class="btn-ghost" id="resetBtn">Réinitialiser ma progression</button>`;
+  document.getElementById('panel-progress').innerHTML = html;
+  document.getElementById('resetBtn').addEventListener('click', async ()=>{
+    if(confirm('Tout remettre à zéro ?')){
+      state = { streak:0, lastCompleted:null, completedDates:[], progressToday:{article:false,grammar:false}, progressLastDate: todayKey() };
+      await saveState();
+      renderAll();
+    }
+  });
+}
+
+function renderAll(){
+  renderArticle();
+  renderGrammar();
+  renderProgress();
+  updateHeader();
+}
+
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-'+tab.dataset.tab).classList.add('active');
+  });
+});
+
+(async function init(){
+  await loadState();
+  await loadNews();
+  renderAll();
+})();
+</script>
+</body>
+</html>
