@@ -1,114 +1,123 @@
 {
-  "updated": "2026-10-12",
-  "week": 42,
-  "category": "health",
+  "updated": "2026-10-19",
+  "week": 43,
+  "category": "general",
   "articles": [
     {
-      "title": "Silent inflammation could be damaging your body — and 5 habits may help keep it in check - Fox News",
-      "description": "Jim LaValle reveals how the gut-immune-brain interface drives chronic inflammation, and why stress, blood sugar and environmental toxins play key roles.",
+      "title": "French police arrest 855 people in Paris as protests, violence erupt across country - CBS News",
+      "description": "Police used tear gas to push back people wearing hoods and masks and throwing fireworks and other objects at officers in the Place de la République, northeast of the Paris city center.",
+      "source": "CBS News",
+      "url": "https://www.cbsnews.com/news/protests-france-rising-living-costs-students/",
+      "publishedAt": "2026-10-18T07:34:07Z",
+      "category": "general",
+      "readMinutes": 1
+    },
+    {
+      "title": "Consumer apprehension grows as US retailers adopt AI-assisted pricing tools - AP News",
+      "description": "U.S. consumers are uneasy about the increasingly high-tech ways that restaurant chains and major retailers are setting prices. Digital price tags are replacing paper ones in grocery aisles. Artificial intelligence tools help businesses decide what to charge b…",
+      "source": "Associated Press",
+      "url": "https://apnews.com/article/ai-prices-dynamic-customers-technology-64c446cd117d3be664de4ab570fb9857",
+      "publishedAt": "2026-10-18T07:07:00Z",
+      "category": "general",
+      "readMinutes": 1
+    },
+    {
+      "title": "Trump faces bipartisan backlash over Russia sanctions waiver, causing top Republicans to break ranks - Fox Business",
+      "description": "President Donald Trump's waiver of Russia sanctions under the Graham Act sparked fierce bipartisan backlash from senators and foreign leaders.",
+      "source": "Fox Business",
+      "url": "https://www.foxbusiness.com/politics/trump-faces-bipartisan-backlash-over-russia-sanctions-waiver-causing-top-republicans-break-ranks",
+      "publishedAt": "2026-10-18T05:16:00Z",
+      "category": "general",
+      "readMinutes": 1
+    },
+    {
+      "title": "Horoscope for Sunday, 10/18/26 by Christopher Renstrom - SFGATE",
+      "description": "CAPRICORN (Dec. 21 - Jan. 18): You're booked solid, but make time to meet with that friend of a friend.  They can open doors for you.",
+      "source": "SFGate",
+      "url": "https://www.sfgate.com/horoscope/article/horoscope-sunday-10-18-26-christopher-renstrom-22477305.php",
+      "publishedAt": "2026-10-18T05:09:48Z",
+      "category": "general",
+      "readMinutes": 1
+    },
+    {
+      "title": "UK police rule out probe into Palestine Action post by PM adviser’s wife - Al Jazeera",
+      "description": "Met Police determine X post by Sarah Helm, seen to endorse Palestine Action, does ‘not meet the criminal threshold’.",
+      "source": "Al Jazeera English",
+      "url": "https://www.aljazeera.com/news/2026/10/18/uk-police-rule-out-probe-into-palestine-action-post-by-pm-advisers-wife",
+      "publishedAt": "2026-10-18T04:58:22Z",
+      "category": "general",
+      "readMinutes": 1
+    },
+    {
+      "title": "Major fire breaks out in Alberta after deadly incident at military base - AP News",
+      "description": "Canada’s defense minister says that people have been killed and injured in an incident at a military base in Alberta that caused a major fire, while reports said that large numbers of injured people were being transported to hospitals. Fire crews scrambled la…",
+      "source": "Associated Press",
+      "url": "https://apnews.com/article/canada-alberta-military-base-fire-wainwright-1a41899da5b6e797b000061fa4da9c6a",
+      "publishedAt": "2026-10-18T03:57:00Z",
+      "category": "general",
+      "readMinutes": 1
+    },
+    {
+      "title": "Tomorrow's Top 25 Today: BYU to No. 1? Cougars make strong case after milestone win over Notre Dame - CBS Sports",
+      "description": "A day of ranked-on-ranked games plus some surprise upsets leave AP voters with plenty of changes to make in the college football rankings",
+      "source": "CBS Sports",
+      "url": "https://www.cbssports.com/college-football/news/college-football-rankings-tomorrows-top-25-ap-poll-byu-no-1/",
+      "publishedAt": "2026-10-18T03:56:00Z",
+      "category": "general",
+      "readMinutes": 1
+    },
+    {
+      "title": "The Best Dressed Stars From the 2026 Academy Museum Gala - Vogue",
+      "description": "The best dressed stars of the night were those who leaned into classic Hollywood glamour—with a twist.",
+      "source": "Vogue",
+      "url": "https://www.vogue.com/slideshow/best-dressed-stars-academy-museum-gala-10-15-2026",
+      "publishedAt": "2026-10-18T03:40:13Z",
+      "category": "general",
+      "readMinutes": 1
+    },
+    {
+      "title": "Video: Mike Malott knocks out Joaquin Buckley with nasty knee to the face at UFC Edmonton - MMA Fighting",
+      "description": "Mike Malott delivers a brutal knockout to Joaquin Buckley in the main event of UFC Edmonton.",
+      "source": "MMA Fighting",
+      "url": "https://www.mmafighting.com/ufc/516425/video-mike-malott-knocks-out-joaquin-buckley-with-nasty-knee-to-the-face-at-ufc-edmonton",
+      "publishedAt": "2026-10-18T02:58:00Z",
+      "category": "general",
+      "readMinutes": 1
+    },
+    {
+      "title": "DNA from chewed gum links elusive Washington state murder suspect to two cold case killings - CBS News",
+      "description": "A detective from Everett, Washington, linked two cold case killings to a known predator. Needing fresh DNA to charge him, she helped devise a clever undercover sting using chewing gum to crack the case.",
+      "source": "CBS News",
+      "url": "https://www.cbsnews.com/news/judy-weaver-susan-vesey-washington-cold-case-murders-mitchell-gaff-chewing-gum-dna-48-hours/",
+      "publishedAt": "2026-10-18T02:57:00Z",
+      "category": "general",
+      "readMinutes": 1
+    },
+    {
+      "title": "‘No Kings’ protesters spurn organizers' rules: ‘This is as partisan as you can get’ - Fox News",
+      "description": "Protesters at official No Kings events openly urged voters to \"vote blue\" and elect Democrats, directly contradicting organizers' nonpartisan rules.",
       "source": "Fox News",
-      "url": "https://www.foxnews.com/health/silent-inflammation-damaging-body-5-habits-help-keep-check",
-      "publishedAt": "2026-10-11T13:00:47Z",
-      "category": "health",
+      "url": "https://www.foxnews.com/politics/no-kings-protesters-spurn-organizers-rules-this-partisan-you-can-get",
+      "publishedAt": "2026-10-18T01:13:28Z",
+      "category": "general",
       "readMinutes": 1
     },
     {
-      "title": "Think honey is healthier than sugar? What to know - USA Today",
-      "description": "Portion size – and the rest of your diet – matters far more than the color or thickness of the sweetener you choose.",
-      "source": "USA Today",
-      "url": "https://www.usatoday.com/story/life/health-wellness/is-honey-better-than-sugar/91868887007/",
-      "publishedAt": "2026-10-11T11:12:06Z",
-      "category": "health",
+      "title": "7 highlights from JD Vance's CBS News town hall: Iran, immigration, corruption and 2028 plans - CBS News",
+      "description": "In an hour-long town hall hosted by CBS News, Vice President JD Vance argued the Trump administration's handling of the economy and Iran will pay dividends in the future.",
+      "source": "CBS News",
+      "url": "https://www.cbsnews.com/news/jd-vance-cbs-town-hall-highlights-michigan/",
+      "publishedAt": "2026-10-18T01:01:00Z",
+      "category": "general",
       "readMinutes": 1
     },
     {
-      "title": "Do Redheads Need More Anesthesia? The Answer Is Complicated. - HuffPost",
-      "description": "Some doctors on TikTok say it's definitely true. Here's what the research says.",
-      "source": "HuffPost",
-      "url": "https://www.huffpost.com/entry/do-redheads-need-more-anesthesia-the-answer-is-complicated-g_l_6ac7b621e4b09d2661d5b342",
-      "publishedAt": "2026-10-11T11:00:19Z",
-      "category": "health",
-      "readMinutes": 1
-    },
-    {
-      "title": "This Minnesota town almost became a futuristic experiment - Star Tribune",
-      "description": "A domed city was planned for rural Swatara, in the north-central part of the state. Locals thought the 1960s vision was “out there.”",
-      "source": "Minneapolis Star Tribune",
-      "url": "https://www.startribune.com/curious-minnesota-experimental-city-of-swatara-history/601890350",
-      "publishedAt": "2026-10-11T11:00:00Z",
-      "category": "health",
-      "readMinutes": 1
-    },
-    {
-      "title": "4 Dietitians Share the Best Snacks for Lower Blood Pressure - Verywell Health",
-      "description": "Dietitians share snacks that may help lower blood pressure, why they’re heart-healthy, and simple ways to prepare them.",
-      "source": "Verywellhealth.com",
-      "url": "https://www.verywellhealth.com/snacks-to-help-lower-blood-pressure-12166252",
-      "publishedAt": "2026-10-11T11:00:00Z",
-      "category": "health",
-      "readMinutes": 1
-    },
-    {
-      "title": "Why doctors are urging women to redo early genetic tests for cancer risks - The Washington Post",
-      "description": "Advances in technology detect far more genetic mutations, which can be lifesaving information for a generation of women first screened years ago.",
-      "source": "The Washington Post",
-      "url": "https://www.washingtonpost.com/health/2026/10/12/women-once-cleared-by-genetic-tests-cancer-risks-now-consider-retesting/",
-      "publishedAt": "2026-10-11T10:05:24Z",
-      "category": "health",
-      "readMinutes": 1
-    },
-    {
-      "title": "Scientists Gave People 2 Nearly Identical Meals. One Triggered Much More Insulin. - ScienceAlert",
-      "description": "You've probably heard a bit about ultra-processed foods by now, and if so, you likely know they're not the healthiest things you can eat.",
-      "source": "ScienceAlert",
-      "url": "https://www.sciencealert.com/scientists-gave-people-2-nearly-identical-meals-one-triggered-much-more-insulin",
-      "publishedAt": "2026-10-11T10:04:04Z",
-      "category": "health",
-      "readMinutes": 1
-    },
-    {
-      "title": "People Are Calling This Toothpaste A ‘Miracle.’ A Dentist Explains What’s Actually Inside - HuffPost",
-      "description": "“One tube of this stuff has changed my life.”",
-      "source": "HuffPost",
-      "url": "https://www.huffpost.com/entry/mouthology-nano-hydroxyapatite-toothpaste-dentist-ud_l_6ac3e3a1e4b0bc90e4006100",
-      "publishedAt": "2026-10-11T10:00:18Z",
-      "category": "health",
-      "readMinutes": 1
-    },
-    {
-      "title": "30-Day High-Protein, High-Fiber Anti-Inflammatory Meal Plan, Created by a Dietitian - EatingWell",
-      "description": "Follow this 30-day high-fiber, high-protein anti-inflammatory meal plan for a month of meals and snacks tailored to reduce inflammation.",
-      "source": "Eatingwell.com",
-      "url": "https://www.eatingwell.com/30-day-high-protein-high-fiber-anti-inflammatory-meal-plan-12151719",
-      "publishedAt": "2026-10-11T10:00:00Z",
-      "category": "health",
-      "readMinutes": 1
-    },
-    {
-      "title": "Scientists Identify Brain Cells That May Explain Why Cannabis Triggers Anxiety - ScienceAlert",
-      "description": "Cannabis is famous for making people feel relaxed, amused, and even elated, but sometimes it can have almost the opposite effect.",
-      "source": "ScienceAlert",
-      "url": "https://www.sciencealert.com/scientists-identify-brain-cells-that-may-explain-why-cannabis-triggers-anxiety",
-      "publishedAt": "2026-10-11T09:03:41Z",
-      "category": "health",
-      "readMinutes": 1
-    },
-    {
-      "title": "Cancer Survivors Are Sharing The Moments They First Realized Something Was Wrong - Yahoo",
-      "description": "\"You have to advocate for yourself, even if it’s hard and you’re getting talked over by 'the experts.' You know your body; listen to what it’s telling you.\"",
-      "source": "Buzzfeed",
-      "url": "https://www.buzzfeed.com/nicolebeckett/cancer-survivors-sharing-realization?origin=bf-yahoo",
-      "publishedAt": "2026-10-11T01:30:00Z",
-      "category": "health",
-      "readMinutes": 1
-    },
-    {
-      "title": "A surprisingly simple way to relieve knee arthritis pain without pills or surgery - Science Daily",
-      "description": "A surprisingly simple change in how you walk could help relieve knee arthritis pain and even slow joint damage. In a year-long clinical trial, researchers found that adjusting the angle of a person&apos;s foot while walking reduced osteoarthritis pain by an a…",
-      "source": "Science Daily",
-      "url": "https://www.sciencedaily.com/releases/2026/10/261009025434.htm",
-      "publishedAt": "2026-10-11T00:02:22Z",
-      "category": "health",
+      "title": "Call of Duty: Modern Warfare 4 Gets a Warm Steam Welcome With 90% Positive Reviews - TechPowerUp",
+      "description": "Call of Duty: Modern Warfare 4 is off to an unusually good start on Steam. The campaign early access went live for pre-order customers on October 16, and at the time of writing, 1,630 of the game's 1,812 Steam user reviews are positive, giving it a \"Very Posi…",
+      "source": "Techpowerup.com",
+      "url": "https://www.techpowerup.com/353835/call-of-duty-modern-warfare-4-gets-a-warm-steam-welcome-with-90-positive-reviews",
+      "publishedAt": "2026-10-18T00:05:15Z",
+      "category": "general",
       "readMinutes": 1
     }
   ]
